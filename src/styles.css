@@ -1,0 +1,530 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;800&display=swap");
+
+html {
+  background: linear-gradient(to top, #ef852d 50%, #ffab51);
+}
+
+body {
+  background-image: radial-gradient(#ef842d 1.5px, transparent 1.5px);
+  background-size: calc(10 * 1.5px) calc(10 * 1.5px);
+  background-attachment: fixed;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+}
+
+.App {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-wrapper {
+  width: 100%;
+  max-width: 300px;
+  max-height: 600px;
+  margin: auto;
+  padding: 50px 10px;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.module-wrapper {
+  outline: 2px solid #eee;
+  outline-offset: -1px;
+  backdrop-filter: blur(2.5px);
+  border-radius: 40px;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.module-wrapper .top-content {
+  display: grid;
+  place-items: center;
+  flex: 1;
+}
+
+.module-wrapper .top-content .heading {
+  margin: 0;
+}
+
+.module-wrapper .top-content .sub-title {
+  padding-inline: 40px;
+}
+
+.module-wrapper .instruction {
+  font-size: 12px;
+  margin-block: 20px;
+  z-index: 1;
+}
+
+.module-wrapper .action-content {
+  background: #eee;
+  color: #555;
+  padding: 30px;
+  border-radius: 40px 40px 0 0;
+  margin-block: 0;
+
+  display: grid;
+  place-items: center;
+  gap: 40px;
+
+  box-shadow: 0px -10px 40px #df7126;
+
+  min-height: 100px;
+  position: relative;
+}
+
+.module-wrapper .action-content::after {
+  position: absolute;
+  top: 10px;
+  width: 40px;
+  height: 4px;
+  background-color: #bbb;
+  border-radius: 5px;
+  margin-inline: auto;
+  left: 0;
+  right: 0;
+}
+
+.init-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.modal-content-wrapper {
+  background: white;
+  border-radius: 7px;
+  z-index: 1;
+
+  padding: 10px 5px;
+  min-width: 200px;
+  display: grid;
+
+  transform: scale(0);
+  transform-origin: bottom right;
+
+  gap: 5px;
+
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 10px;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.modal-content-wrapper.open {
+  transform: scale(1);
+}
+
+.modal-content-wrapper .modal-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  background: transparent;
+  border-radius: 3px;
+  background: #ffab5122;
+  color: #555;
+
+  height: 40px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 30px auto;
+  align-items: center;
+
+  text-align: left;
+  padding-right: 10px;
+  padding-block: 5px;
+}
+
+.modal-content-wrapper .modal-button span {
+  background: #ffab5144;
+  color: #ef852d;
+  border-radius: 3px;
+
+  width: 100%;
+  aspect-ratio: 1;
+  margin: auto;
+
+  display: grid;
+  place-items: center;
+}
+
+.timer-display-wrapper {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 60px;
+}
+
+.timer-control-wrapper {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-inline: auto;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  background: #eeeeee;
+  box-shadow: 5px 5px 10px #cacaca, -5px -5px 10px #ffffff;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  font-size: 20px;
+  color: #555;
+
+  display: grid;
+  place-items: center;
+  margin-inline: auto;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.timer-control-wrapper .action-button {
+  --ggs: 1.5;
+}
+
+.action-button.small {
+  scale: 0.6;
+}
+
+.action-button.hide {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.action-button:active {
+  background: #eeeeee;
+  box-shadow: inset 5px 5px 10px #cacaca, inset -5px -5px 10px #ffffff;
+}
+
+.history-wrapper {
+  display: grid;
+  gap: 5px;
+}
+
+.history-item {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 3px 6px 2px;
+  background: #555;
+  max-width: fit-content;
+  margin-inline: auto;
+  border-radius: 3px;
+  color: #000;
+}
+
+.challenge-wrapper :is(.date-input, .select) {
+  padding: 5px 0px;
+  margin-inline: auto;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #555;
+  text-align: center;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.challenge-wrapper ::-webkit-calendar-picker-indicator {
+  position: absolute;
+  opacity: 0;
+  padding: 0px;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.challenge-wrapper .select {
+  font-size: 14px;
+}
+
+.challenge-wrapper .duration-interval-wrapper {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  height: 40px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.challenge-wrapper .duration-interval-wrapper.hide {
+  height: 0px;
+  opacity: 0;
+}
+
+.challenge-wrapper .duration-interval-wrapper .di-label {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.challenge-wrapper .basic-instruction {
+  overflow: hidden;
+  max-height: 1000px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.challenge-wrapper .basic-instruction.hide {
+  max-height: 0px;
+  opacity: 0;
+}
+
+.gg-play-button {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+}
+.gg-play-button::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 6px;
+  left: 9px;
+}
+
+.gg-play-pause {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 8px;
+  height: 10px;
+  border-left: 3px solid;
+  border-right: 3px solid;
+}
+
+.gg-play-stop {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+}
+
+.gg-check {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+.gg-check::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 6px;
+  height: 10px;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg);
+}
+
+.gg-repeat {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  box-shadow: -2px -2px 0 0, 2px 2px 0 0;
+  width: 14px;
+  height: 6px;
+}
+.gg-repeat::after,
+.gg-repeat::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+.gg-repeat::before {
+  border-left: 5px solid;
+  top: -4px;
+  right: 0;
+}
+.gg-repeat::after {
+  border-right: 5px solid;
+  bottom: -4px;
+  left: 0;
+}
+
+.gg-redo {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 14px;
+  height: 14px;
+  border: 2px solid;
+  border-right-color: transparent;
+  border-radius: 100px;
+}
+.gg-redo::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  top: -3px;
+  right: -1px;
+  transform: rotate(68deg);
+}
+
+.gg-more-vertical-o {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-radius: 24px;
+}
+.gg-more-vertical-o::before {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 20px;
+  top: 8px;
+  left: 8px;
+  box-shadow: 0 -5px 0, 0 5px 0;
+}
+
+.gg-chevron-right {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+.gg-chevron-right::after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(-45deg);
+  right: 6px;
+  top: 4px;
+}
+
+.gg-copy {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 14px;
+  height: 18px;
+  border: 2px solid;
+  margin-left: -5px;
+  margin-top: -4px;
+}
+.gg-copy::after,
+.gg-copy::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+}
+.gg-copy::before {
+  background: linear-gradient(to left, currentColor 5px, transparent 0)
+      no-repeat right top/5px 2px,
+    linear-gradient(to left, currentColor 5px, transparent 0) no-repeat left
+      bottom/ 2px 5px;
+  box-shadow: inset -4px -4px 0 -2px;
+  bottom: -6px;
+  right: -6px;
+  width: 14px;
+  height: 18px;
+}
+.gg-copy::after {
+  width: 6px;
+  height: 2px;
+  background: currentColor;
+  left: 2px;
+  top: 2px;
+  box-shadow: 0 4px 0, 0 8px 0;
+}
+
+.gg-share {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 100px;
+  box-shadow: 10px -6px 0, 10px 6px 0;
+}
+.gg-share::after,
+.gg-share::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  left: 2px;
+}
+.gg-share::before {
+  top: 0;
+  transform: rotate(-35deg);
+}
+.gg-share::after {
+  bottom: 0;
+  transform: rotate(35deg);
+}
