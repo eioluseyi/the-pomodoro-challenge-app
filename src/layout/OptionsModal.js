@@ -12,34 +12,14 @@ function OptionsModal({ options = {} }) {
     hasOptions && (
       <>
         <button
-          className="action-button small"
-          style={{
-            position: "absolute",
-            bottom: "5px",
-            right: "5px",
-            boxShadow: "none"
-          }}
+          className="action-button modal-trigger-button small"
           onClick={() => setIsOpen(true)}
         >
           <i className="gg-more-vertical-o"></i>
         </button>
         <div
+          className={`modal-wrapper ${isOpen ? "open" : ""}`}
           onClick={() => setIsOpen(false)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.1)",
-            backdropFilter: "blur(2px)",
-            display: "flex",
-            visibility: isOpen ? "visible" : "hidden",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: isOpen ? "1" : "-1",
-            color: "#555"
-          }}
         >
           <div
             onClick={(e) => {
